@@ -10,14 +10,14 @@
     <nav>
       <div class="container">
         <div class="logo">
-          <a href="index.html">Supercar World</a>
+          <a href="index.php">Supercar World</a>
         </div>
         <ul class="menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="models.html">Models</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="about.php">About</a></li>
+          <li><a href="models.php">Models</a></li>
+          <li><a href="gallery.php">Gallery</a></li>
+          <li><a href="contact.php">Contact</a></li>
         </ul>
       </div>
     </nav>
@@ -27,7 +27,7 @@
     <div class="container">
       <h1>Welcome to Supercar World</h1>
       <p>Discover the thrill of high-performance vehicles</p>
-      <a href="models.html" class="btn">Explore Models</a>
+      <a href="models.php" class="btn">Explore Models</a>
     </div>
   </section>
 
@@ -41,24 +41,42 @@
   <section class="models">
     <div class="container">
       <h2>Our Models</h2>
-      <div class="model">
-        <img src="model1.jpg" alt="Model 1">
-        <h3>Model 1</h3>
-        <p>Experience the power and elegance of Model 1, a masterpiece of engineering and design. With its cutting-edge technology and exhilarating performance, it will leave you breathless.</p>
-        <a href="model1.html" class="btn">Learn More</a>
-      </div>
-      <div class="model">
-        <img src="model2.jpg" alt="Model 2">
-        <h3>Model 2</h3>
-        <p>Discover the perfect balance of speed and luxury with Model 2. Its sleek lines, luxurious interior, and mind-blowing performance will redefine your driving experience.</p>
-        <a href="model2.html" class="btn">Learn More</a>
-      </div>
+      <?php
+        // Connect to the database
+        $conn = mysqli_connect("localhost", "username", "password", "supercars");
+
+        // Check connection
+        if (!$conn) {
+          die("Connection failed: " . mysqli_connect_error());
+        }
+
+        // Fetch models from the database
+        $sql = "SELECT * FROM models";
+        $result = mysqli_query($conn, $sql);
+
+        // Display models
+        if (mysqli_num_rows($result) > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="model">';
+            echo '<img src="' . $row['image'] . '" alt="' . $row['name'] . '">';
+            echo '<h3>' . $row['name'] . '</h3>';
+            echo '<p>' . $row['description'] . '</p>';
+            echo '<a href="model.php?id=' . $row['id'] . '" class="btn">Learn More</a>';
+            echo '</div>';
+          }
+        } else {
+          echo '<p>No models available.</p>';
+        }
+
+        // Close the database connection
+        mysqli_close($conn);
+      ?>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <p>&copy; 2023 Supercar World. All rights reserved.</p>
+      <p>&copy; <?php echo date('Y'); ?> Supercar World. All rights reserved.</p>
     </div>
   </footer>
 </body>
