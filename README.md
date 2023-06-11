@@ -2,82 +2,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Supercar World</title>
-  <link rel="stylesheet" href="style.css">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
+    <style>
+        /* CSS styles specific to this page */
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
 </head>
 <body>
-  <header>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+
     <nav>
-      <div class="container">
-        <div class="logo">
-          <a href="index.php">Supercar World</a>
-        </div>
-        <ul class="menu">
-          <li><a href="index.php">Home</a></li>
-          <li><a href="about.php">About</a></li>
-          <li><a href="models.php">Models</a></li>
-          <li><a href="gallery.php">Gallery</a></li>
-          <li><a href="contact.php">Contact</a></li>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
-      </div>
     </nav>
-  </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Welcome to Supercar World</h1>
-      <p>Discover the thrill of high-performance vehicles</p>
-      <a href="models.php" class="btn">Explore Models</a>
-    </div>
-  </section>
+    <section>
+        <h2>About</h2>
+        <p>This is a brief description of my website.</p>
+    </section>
 
-  <section class="about">
-    <div class="container">
-      <h2>About Us</h2>
-      <p>Welcome to Supercar World, the ultimate destination for car enthusiasts who appreciate the finest and fastest automobiles on the planet. With our passion for supercars and commitment to excellence, we bring you the latest news, reviews, and insights into the world of high-performance vehicles.</p>
-    </div>
-  </section>
+    <section>
+        <h2>Services</h2>
+        <ul>
+            <li>Service 1</li>
+            <li>Service 2</li>
+            <li>Service 3</li>
+        </ul>
+    </section>
 
-  <section class="models">
-    <div class="container">
-      <h2>Our Models</h2>
-      <?php
-        // Connect to the database
-        $conn = mysqli_connect("localhost", "username", "password", "supercars");
+    <section>
+        <h2>Contact</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
 
-        // Check connection
-        if (!$conn) {
-          die("Connection failed: " . mysqli_connect_error());
-        }
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
 
-        // Fetch models from the database
-        $sql = "SELECT * FROM models";
-        $result = mysqli_query($conn, $sql);
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea>
 
-        // Display models
-        if (mysqli_num_rows($result) > 0) {
-          while ($row = mysqli_fetch_assoc($result)) {
-            echo '<div class="model">';
-            echo '<img src="' . $row['image'] . '" alt="' . $row['name'] . '">';
-            echo '<h3>' . $row['name'] . '</h3>';
-            echo '<p>' . $row['description'] . '</p>';
-            echo '<a href="model.php?id=' . $row['id'] . '" class="btn">Learn More</a>';
-            echo '</div>';
-          }
-        } else {
-          echo '<p>No models available.</p>';
-        }
+            <input type="submit" value="Submit">
+        </form>
+    </section>
 
-        // Close the database connection
-        mysqli_close($conn);
-      ?>
-    </div>
-  </section>
+    <section>
+        <h2>Gallery</h2>
+        <div class="gallery">
+            <img src="![Uploading jag f type.jpg…]()
+.jpg" alt="Image 1">
+            <img src="image2.jpg" alt="Image 2">
+            <img src="image3.jpg" alt="Image 3">
+        </div>
+    </section>
 
-  <footer>
-    <div class="container">
-      <p>&copy; <?php echo date('Y'); ?> Supercar World. All rights reserved.</p>
-    </div>
-  </footer>
+    <footer>
+        <p>&copy; 2023 My Website. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript code for interactivity
+        const inputs = document.querySelectorAll('input');
+
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.classList.add('highlight');
+            });
+
+            input.addEventListener('blur', function() {
+                this.classList.remove('highlight');
+            });
+        });
+    </script>
 </body>
 </html>
